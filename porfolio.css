@@ -1,15 +1,41 @@
 body {
     background-color: #93E2D5;
-    margin:0px;
-    padding: 0px;
+    margin:0 auto;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
+    overflow-x: hidden;
+
+}
+
+.meses {
+    margin:  0 auto;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.grafico {
+    overflow-x: hidden;
+}
+
+.graficodata {
+    padding: 20px;
 }
 
     /** NAVEGADOR **/
 
     /**--Adaptación de https://programadorwebvalencia.com/menu-responsive-design-con-boton-hamburguesa/--------**/
-
+.logo {
+    margin:20px;
+    font-family: 'Prata', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #dafff9;
+    padding-top: 8px;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -49,14 +75,17 @@ body {
 .nav__button {
     text-align: right;
     margin: 15px;
+    font-size: 25px;
 }
 
 .nav__button, 
     .header__button-nav--open {
     opacity: 50%;
-    color: #333333;
+    color: #fff;
     border-width: 0px;
     background-color: rgba(0, 0, 0, 0.0);
+    font-size: 25px;
+    cursor: pointer;
 
 }
 .nav__button,
@@ -71,11 +100,13 @@ body {
   border-width: 0px;
   background-color: rgba(0, 0, 0, 0.0);
   transition: 0.5s;
-
+  cursor: pointer;
 }
+
 .nav__button,
   .header__button-nav--close:hover {
       opacity: 1.0;
+      font-size: 45px;
 }
 
 .nav__ul {
@@ -102,7 +133,66 @@ body {
   }
 
 
+
+
     /* FONDOS */
+
+.previo {
+    position: static;
+    margin: auto;
+    height: 100vh; /** Para que se adapte siempre a la pantalla inicial **/
+    min-height: 650px;
+      display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+.parrafo2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #333333;
+    margin: auto;
+    max-width: 270px;
+    box-sizing: border-box;
+    padding: 20% 0px 0px 0px;
+    text-align: left;
+
+}
+.ulprevio{
+    list-style: none;
+    font-size: 18px;    
+    line-height: 1.5;
+    background-color: #ffffff;
+    padding: 20px;
+    max-width: 270px;
+    margin-top: 0px;
+
+}
+
+.liprevio {
+        padding-bottom: 5px;
+}
+
+.liprevio a {
+    color: #202020;
+    text-decoration: underline #93E2D5;
+
+}
+
+.bloqueprevio {
+margin-top: -100px;
+}
+
+.fechaprevio {
+    max-width: 270px;
+    text-align: right;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
 
 .inicio {
     position: static;
@@ -189,13 +279,14 @@ body {
     display: block;
     text-align: center;
     list-style: none;
-    margin: 0px 0px 40px 0px;
     margin: auto;
     box-sizing: border-box;
     padding: 0px;
     overflow: visible;
     max-width: 1300px;
     height: auto;
+    margin-bottom: 40px;
+
 }
 
 .trabajos .trabajo {
@@ -205,10 +296,8 @@ body {
     vertical-align: top;
     margin-bottom:  4px;
     box-sizing: border-box;
-    padding-left: 5px;
-    padding-right: 5px;
-    border:  1px solid #ffffff;
-    border-radius: 14px 14px 14px 14px;
+    padding-left: 15px;
+    padding-right: 15px;
     background-color: #ffffff;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
 }
@@ -276,7 +365,6 @@ body {
     padding-bottom: 0px;
 }
 
-    /** Obtenido de https://www.psdahtmlpasoapaso.com/blog/como-crear-imagenes-responsive-con-css/*/
 
 .breakpoint  {
     max-width: 100%;
@@ -308,13 +396,22 @@ h1 {
     margin:20% 15% 0% 15%;
 }
 
+.pre {
+        font-family: 'Lato', sans-serif;
+font-size:23px; 
+color:#fff;
+    font-weight: 100;
+    text-align: center;
+    margin: 15% 30% 15% 30%;
+
+}
 h3 {
     font-family: 'Lato', sans-serif;
     font-size:27px;
     font-weight: 100;
     color: #333333;
     margin: 3% 15% 15px 15%;
-    text-align: left !important;
+        text-align: left;
 }
 
 .historia .parrafo {
@@ -370,21 +467,40 @@ h3 {
     text-transform: uppercase;
 }
 
+.trabajo .imagen {
+    width: 100%; 
+    height: 230px; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    overflow: hidden; 
+}
+
+.trabajo .imagencont {
+  width: 100%; 
+  height: auto; 
+  text-align: center;
+}
+
 .trabajo .imagen img {
     margin-bottom: 10px;
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: cover;
 }
 
 .trabajo .imagen2 {
     margin-bottom: 10px;
     background-color: #333333;
-    width: 230px;
-    height: 230px;
+    max-width: 230px;
+   max-height: 230px;
     margin: auto;
 }
 
 .papel .parrafo {
     font-family: 'Prata', serif;
     font-size:32px;
+    line-height: 48px;
     font-weight: 400;
     color: #333333;
     box-sizing: border-box;
@@ -398,6 +514,7 @@ h3 {
 .cronologia .parrafo {
     font-family: 'Prata', serif;
     font-size:32px;
+        line-height: 48px;
     font-weight: 400;
     color: #333333;
     margin: auto;
@@ -429,12 +546,26 @@ h3 {
     text-align: center !important;
 }
 
+
+
     /* Destacado */
 
 .mark {
     color: #333333;
     background-color: #FFDE00;
+        padding-left: 6px;
+    padding-right: 6px;
 }
+
+
+.mark2 {
+    color: #f2f2f2;
+    background-color: #f05945;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+
 
     /* FLECHA */
     /* Adaptación de https://www.lawebdelprogramador.com/codigo/CSS/3221-Dibujar-una-flecha-con-html-y-css.html */
@@ -449,6 +580,7 @@ h3 {
     background-color: #93E2D5;
 }
 
+
 .triangulo>div {
     border-style: solid;
     border-width: 18px;
@@ -460,24 +592,37 @@ h3 {
 }
 
 
-@keyframes example {
+@keyframes animainicio {
   from {top: -100px;}
   to {top: 40px;}
 }
 }
 
+.triangulo.previo{
+    border-color: #93E2D5 transparent transparent transparent;
+}
+
+.triangulo.previo>div {
+    border-color: white transparent transparent transparent;
+    top:-19px;
+    left:-10px;
+}
+
+
 .triangulo.arriba{
     border-color: #93E2D5 transparent transparent transparent;
 }
+
 
 .triangulo.arriba>div {
     border-color: white transparent transparent transparent;
     top:-19px;
     left:-10px;
-    animation-name: example;
+    animation-name: animainicio;
     animation-duration: 3s;  
     animation-delay: 1s;
     animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
     /* CAJA MAIL */
@@ -485,7 +630,7 @@ h3 {
 .cajamail a {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-    font-size: 27px;
+    font-size: 22px;
     display: block;
     margin: auto;
     text-align: center;
@@ -538,4 +683,5 @@ h3 {
     margin-top: 8px;
     margin-left: 10px;
 }
+
 
