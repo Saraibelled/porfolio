@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saraibelled.github.io/porfolio/sitemap.xml
