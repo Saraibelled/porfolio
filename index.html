@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- META BÁSICOS -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,20 +14,29 @@
 <link rel="canonical" href="https://saraibelled.github.io/porfolio/" />
 
 <!-- FAVICON -->
-<link rel="icon" href="https://saraibelled.github.io/porfolio/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
+
+
 
 <!-- META OG (REDES SOCIALES) -->
 <meta property="og:title" content="Sara I. Belled – Historias Visuales e Innovación" />
-<meta property="og:description" content="Explora el porfolio de Sara I. Belled: periodismo visual, IA, storytelling y diseño de información" />
+<meta property="og:description" content="Soy Sara I. Belled, soy periodista visual y aquí encontrarás narrativa, formatos, innovación e IA" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://saraibelled.github.io/porfolio/" />
-<meta property="og:image" content="https://saraibelled.github.io/porfolio/image/og-image.jpg" />
+<meta property="og:image" content="https://github.com/Saraibelled/porfolio/blob/main/image/portada-1200x630.jpg?raw=true" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Sara I. Belled" />
 
 <!-- TWITTER CARDS -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Sara I. Belled – Historias Visuales e Innovación" />
 <meta name="twitter:description" content="Porfolio de Sara I. Belled: narrativa, formatos, innovación e IA" />
-<meta name="twitter:image" content="https://saraibelled.github.io/porfolio/image/og-image.jpg" />
+<meta name="twitter:image" content="https://github.com/Saraibelled/porfolio/blob/main/image/portada-ok-1200x628.jpg?raw=true" />
+<meta name="twitter:site" content="@saraibelled" />
+<meta name="twitter:creator" content="@saraibelled" />
 
 <!-- APPLE + MOBILE -->
 <meta name="apple-mobile-web-app-title" content="Sara I. Belled" />
@@ -477,6 +484,20 @@ color: #202020;
   font-family: 'Inter', sans-serif;
 }
 
+.intro a {
+  color: #202020;            
+  text-decoration: underline;                
+  font-weight: 500;         
+  transition: color 0.3s; 
+    transition: background-color 0.3s;   
+}
+
+.intro a:hover {
+  color: #202020;
+  background-color: #FAD144;           
+  text-decoration: underline;
+}
+
 /* ========== CONTENEDOR TEXTO ========== */
 .parrafo {
   margin-top: 120px;
@@ -533,7 +554,7 @@ input[type="text"]:focus {
       }
       .estrella-tarjeta {
         fill: none;
-        stroke: #fdd200;
+        stroke: #FAD144;
         stroke-miterlimit: 10;
         stroke-width: 3px;
       }
@@ -557,7 +578,7 @@ width: 20px;
 
   <p class="intro">Me divierte resolver y disfruto buscando modos de contar mejor, más rápido y más fácil. Trabajo en la Agencia Colpisa, la redacción central de los diarios de Vocento, y muchas de las herramientas en las que trabajo son implementadas por las cabeceras. </p>
 
-  <p class="intro">De vez en cuando cambio este porfolio y lo adapto para probar cosas nuevas. Últimamente me estaba costando regresar a él para mantenerlo y se me ocurrió que podría hacer un página que se actualizase con un excel. Esto me sirve a mí y a quien se pase por aquí. Quizá hasta es interesante tener un apartado de 'Casos de estudio', por si a alguien le inspira. Tendrás que volver para ver si al final me animo :)</p>
+  <p class="intro">De vez en cuando cambio este porfolio y lo adapto para probar cosas nuevas. Últimamente me estaba costando regresar a él para mantenerlo y se me ocurrió que podría hacer una página que se actualizase con un excel. Esto me sirve a mí y a quien se pase por aquí. Quizá hasta es interesante tener un apartado de 'Casos de estudio', por si a alguien le inspira. Tendrás que volver para ver si al final me animo :)</p>
 </div>
 
   <input type="text" id="buscador" placeholder="Buscar historias..." />
@@ -692,8 +713,9 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
 
   const tarjetasFiltradas = trabajos.filter(trabajo => {
     const coincideTexto =
-      trabajo.titulo?.toLowerCase().includes(query) ||
-      trabajo.categoria?.toLowerCase().includes(query);
+  trabajo.titulo?.toLowerCase().includes(query) ||
+  trabajo.categoria?.toLowerCase().includes(query) ||
+  trabajo.masinfo?.toLowerCase().includes(query);
     const coincideCategoria = !filtroCategoria || trabajo.buscadorArray.includes(filtroCategoria);
     const coincidePremiado = !premiadosSolo || trabajo.premiado;
     return coincideTexto && coincideCategoria && coincidePremiado;
@@ -705,7 +727,7 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
     tarjetaFalsa.innerHTML = `
       <h3>Sin resultados por el momento</h3>
       <p style="color: #666;">No se encontraron historias con esos criterios.<br>Prueba otro filtro o usa el buscador :)</p>
-      <img src="https://github.com/Saraibelled/porfolio/blob/gh-pages/image/upsss-display.jpg?raw=true" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
+      <img src="https://github.com/Saraibelled/porfolio/blob/main/image/image-none.jpg?raw=true" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
     `;
     contenedor.appendChild(tarjetaFalsa);
     return;
@@ -738,9 +760,9 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
       <p style="color: ${trabajo.colorfecha || '#6b6b6b'}">${trabajo.fecha}</p>
 
       ${trabajo.imagen?.endsWith('.mp4') || trabajo.imagen?.endsWith('.webm') ? `
-        <video controls width="100%" style="border-radius: 8px; margin: 1rem 0;">
+        <video autoplay muted loop playsinline width="100%" style="border-radius: 8px;">
           <source src="${trabajo.imagen}" type="video/mp4">
-          Tu navegador no soporta video HTML5.
+          Tu navegador no soporta el video.
         </video>` :
       trabajo.imagen?.includes('youtube.com') || trabajo.imagen?.includes('vimeo.com') ? `
         <iframe src="${trabajo.imagen}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; margin: 1rem 0;"></iframe>` :
