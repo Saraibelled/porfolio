@@ -14,10 +14,10 @@
 <link rel="canonical" href="https://saraibelled.github.io/porfolio/" />
 
 <!-- FAVICON -->
-<link rel="icon" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true" type="image/x-icon" />
-  <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
-  <link rel="icon" type="image/png" sizes="192x192" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/Saraibelled/porfolio/blob/main/image/fav-icon.jpg?raw=true">
+<link rel="icon" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon.png" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-180.png">
 
 
 
@@ -26,7 +26,7 @@
 <meta property="og:description" content="Soy Sara I. Belled, soy periodista visual y aquí encontrarás narrativa, formatos, innovación e IA" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://saraibelled.github.io/porfolio/" />
-<meta property="og:image" content="https://github.com/Saraibelled/porfolio/blob/main/image/portada-1200x630.jpg?raw=true" />
+<meta property="og:image" content="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/portada-1200x630.jpg" />
 <meta property="og:locale" content="es_ES" />
 <meta property="og:site_name" content="Sara I. Belled" />
 
@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Sara I. Belled – Historias Visuales e Innovación" />
 <meta name="twitter:description" content="Porfolio de Sara I. Belled: narrativa, formatos, innovación e IA" />
-<meta name="twitter:image" content="https://github.com/Saraibelled/porfolio/blob/main/image/portada-ok-1200x628.jpg?raw=true" />
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/portada-1200x630.jpg" />
 <meta name="twitter:site" content="@saraibelled" />
 <meta name="twitter:creator" content="@saraibelled" />
 
@@ -80,7 +80,7 @@ h1 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 125%;
   text-align: center;
   padding: 20px;
@@ -194,7 +194,7 @@ input[type="text"] {
   top: 50%;
   transform: translateY(-50%);
   width: 40px;
-  height: 30px;
+  height: 40px;
   display: none;
   align-items: center;
   justify-content: center;
@@ -273,8 +273,14 @@ input[type="text"] {
   right: 10px;
   font-size: 24px;
   color: #FAD144;
-  cursor: default;
+  cursor: pointer;
   z-index: 2;
+}
+
+.estrella-activa path,
+.estrella:hover path {
+  fill: #FAD144; 
+  stroke: #FAD144;
 }
 
 .estrella .tooltip {
@@ -293,11 +299,12 @@ input[type="text"] {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   white-space: normal;
   word-break: break-word;
-  max-width: 320px;
+  width: 220px;
   z-index: 5;
 }
 
-.estrella:hover .tooltip {
+.estrella:hover .tooltip,
+.estrella.activo .tooltip {
   opacity: 1;
 }
 
@@ -567,10 +574,15 @@ width: 20px;
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<meta name="google-site-verification" content="Rs0lXnB5W23mDhKp1U_r4fj0GedjktnCnCTljOpw9_I" />
+<meta name="google-site-verification" content="uVca0jWVMSMKbX7NbKcba68iG8SyOAhYkIXoTDWWYyk" />
 </head>
 <body>
 <main>
+
+  <button id="toggle-lang" style="position: fixed; top: 20px; right: 20px; background-color: #fff; border: 1px solid #ccc; padding: 8px 12px; border-radius: 6px; font-family: 'Inter', sans-serif; cursor: pointer; z-index: 9999;">
+  EN / ES
+</button>
+
   <h1>Sara I Belled – Narrativa, formatos, innovación e IA</h1>
 
 <div class="parrafo">
@@ -706,77 +718,76 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
   }
 
   function renderTrabajos(trabajos) {
-  const contenedor = document.getElementById('contenedor-trabajos');
-  const query = document.getElementById('buscador').value.toLowerCase();
-  const premiadosSolo = document.getElementById('toggle-premios').checked;
+    const contenedor = document.getElementById('contenedor-trabajos');
+    const query = document.getElementById('buscador').value.toLowerCase();
+    const premiadosSolo = document.getElementById('toggle-premios').checked;
 
-  contenedor.innerHTML = '';
+    contenedor.innerHTML = '';
 
-  const tarjetasFiltradas = trabajos.filter(trabajo => {
-    const coincideTexto =
-  trabajo.titulo?.toLowerCase().includes(query) ||
-  trabajo.categoria?.toLowerCase().includes(query) ||
-  trabajo.masinfo?.toLowerCase().includes(query);
-    const coincideCategoria = !filtroCategoria || trabajo.buscadorArray.includes(filtroCategoria);
-    const coincidePremiado = !premiadosSolo || trabajo.premiado;
-    return coincideTexto && coincideCategoria && coincidePremiado;
-  });
+    const tarjetasFiltradas = trabajos.filter(trabajo => {
+      const coincideTexto =
+        trabajo.titulo?.toLowerCase().includes(query) ||
+        trabajo.categoria?.toLowerCase().includes(query) ||
+        trabajo.masinfo?.toLowerCase().includes(query);
+      const coincideCategoria = !filtroCategoria || trabajo.buscadorArray.includes(filtroCategoria);
+      const coincidePremiado = !premiadosSolo || trabajo.premiado;
+      return coincideTexto && coincideCategoria && coincidePremiado;
+    });
 
-  if (tarjetasFiltradas.length === 0) {
-    const tarjetaFalsa = document.createElement('div');
-    tarjetaFalsa.className = 'tarjeta falsa';
-    tarjetaFalsa.innerHTML = `
-      <h3>Sin resultados por el momento</h3>
-      <p style="color: #666;">No se encontraron historias con esos criterios.<br>Prueba otro filtro o usa el buscador :)</p>
-      <img src="https://github.com/Saraibelled/porfolio/blob/main/image/image-none.jpg?raw=true" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
-    `;
-    contenedor.appendChild(tarjetaFalsa);
-    return;
+    if (tarjetasFiltradas.length === 0) {
+      const tarjetaFalsa = document.createElement('div');
+      tarjetaFalsa.className = 'tarjeta falsa';
+      tarjetaFalsa.innerHTML = `
+        <h3>Sin resultados por el momento</h3>
+        <p style="color: #666;">No se encontraron historias con esos criterios.<br>Prueba otro filtro o usa el buscador :)</p>
+        <img src="https://github.com/Saraibelled/porfolio/blob/main/image/image-none.jpg?raw=true" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
+      `;
+      contenedor.appendChild(tarjetaFalsa);
+      return;
+    }
+
+    tarjetasFiltradas.forEach(trabajo => {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'tarjeta';
+      tarjeta.style.backgroundColor = trabajo.colorFondo || '#ffffff';
+      tarjeta.style.color = trabajo.colorTexto || '#000000';
+
+      const textoPremio = (trabajo['donde-premiado'] || trabajo.premiado || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/\\n/g, '<br>');
+
+      tarjeta.innerHTML = `
+        ${trabajo.premiado ? `
+          <div class="estrella">
+            <svg id="estrella-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+              <path class="estrella-tarjeta" d="M23.85,6.2l2.1,6.45c.4,1.24,1.55,2.07,2.85,2.07h6.78c2.91,0,4.11,3.72,1.76,5.43l-5.49,3.99c-1.05.76-1.49,2.12-1.09,3.35l2.1,6.45c.9,2.76-2.27,5.06-4.62,3.35l-5.49-3.99c-1.05-.76-2.48-.76-3.53,0l-5.49,3.99c-2.35,1.71-5.51-.59-4.62-3.35l2.1-6.45c.4-1.24-.04-2.59-1.09-3.35l-5.49-3.99c-2.35-1.71-1.14-5.43,1.76-5.43h6.78c1.3,0,2.45-.84,2.85-2.07l2.1-6.45c.9-2.76,4.81-2.76,5.71,0Z"/>
+            </svg>
+            <div class="tooltip">${textoPremio}</div>
+          </div>` : ''}
+        <h3>${trabajo.titulo}</h3>
+        <p style="color: ${trabajo.colorfecha || '#6b6b6b'}">${trabajo.fecha}</p>
+
+        ${trabajo.imagen?.endsWith('.mp4') || trabajo.imagen?.endsWith('.webm') ? `
+          <video autoplay muted loop playsinline width="100%" style="border-radius: 8px;">
+            <source src="${trabajo.imagen}" type="video/mp4">
+            Tu navegador no soporta el video.
+          </video>` :
+        trabajo.imagen?.includes('youtube.com') || trabajo.imagen?.includes('vimeo.com') ? `
+          <iframe src="${trabajo.imagen}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; margin: 1rem 0;"></iframe>` :
+        trabajo.imagen ? `
+          <img src="${trabajo.imagen}" alt="${trabajo.titulo}" loading="lazy" style="border-radius: 8px; margin: 1rem 0;" />` : ''}
+        <button onclick="window.open('${trabajo.url}', '_blank')" class="leer-mas-btn">Leer más</button>
+      `;
+
+      contenedor.appendChild(tarjeta);
+    });
+
+    evaluarAlturaTrabajos();
   }
-
-  tarjetasFiltradas.forEach(trabajo => {
-    const tarjeta = document.createElement('div');
-    tarjeta.className = 'tarjeta';
-    tarjeta.style.backgroundColor = trabajo.colorFondo || '#ffffff';
-    tarjeta.style.color = trabajo.colorTexto || '#000000';
-
-    const textoPremio = (trabajo['donde-premiado'] || trabajo.premiado || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;')
-      .replace(/\\n/g, '<br>');
-
-    tarjeta.innerHTML = `
-      ${trabajo.premiado ? `
-        <div class="estrella">
-          <?xml version="1.0" encoding="UTF-8"?>
-<svg id="estrella-svg" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
-  <path class="estrella-tarjeta" d="M23.85,6.2l2.1,6.45c.4,1.24,1.55,2.07,2.85,2.07h6.78c2.91,0,4.11,3.72,1.76,5.43l-5.49,3.99c-1.05.76-1.49,2.12-1.09,3.35l2.1,6.45c.9,2.76-2.27,5.06-4.62,3.35l-5.49-3.99c-1.05-.76-2.48-.76-3.53,0l-5.49,3.99c-2.35,1.71-5.51-.59-4.62-3.35l2.1-6.45c.4-1.24-.04-2.59-1.09-3.35l-5.49-3.99c-2.35-1.71-1.14-5.43,1.76-5.43h6.78c1.3,0,2.45-.84,2.85-2.07l2.1-6.45c.9-2.76,4.81-2.76,5.71,0Z"/>
-</svg>
-          <div class="tooltip">${textoPremio}</div>
-        </div>` : ''}
-      <h3>${trabajo.titulo}</h3>
-      <p style="color: ${trabajo.colorfecha || '#6b6b6b'}">${trabajo.fecha}</p>
-
-      ${trabajo.imagen?.endsWith('.mp4') || trabajo.imagen?.endsWith('.webm') ? `
-        <video autoplay muted loop playsinline width="100%" style="border-radius: 8px;">
-          <source src="${trabajo.imagen}" type="video/mp4">
-          Tu navegador no soporta el video.
-        </video>` :
-      trabajo.imagen?.includes('youtube.com') || trabajo.imagen?.includes('vimeo.com') ? `
-        <iframe src="${trabajo.imagen}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; margin: 1rem 0;"></iframe>` :
-      trabajo.imagen ? `
-        <img src="${trabajo.imagen}" alt="${trabajo.titulo}" loading="lazy" style="border-radius: 8px; margin: 1rem 0;" />` : ''}
-      <button onclick="window.open('${trabajo.url}', '_blank')" class="leer-mas-btn">Leer más</button>
-    `;
-
-    contenedor.appendChild(tarjeta);
-  });
-
-  evaluarAlturaTrabajos();
-}
 
   function evaluarAlturaTrabajos() {
     const wrapper = document.getElementById('contenedor-trabajos-wrapper');
@@ -798,6 +809,7 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
     }, 100);
   }
 
+  // Mostrar todo
   document.getElementById('ver-mas-btn').addEventListener('click', () => {
     document.getElementById('fade-bottom').style.display = 'none';
     document.getElementById('ver-mas-btn').style.display = 'none';
@@ -823,7 +835,6 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
     renderTrabajos(trabajosGlobal);
   });
 
-   // Hacer clic en "Mostrar todas" desactiva el toggle
   document.getElementById('label-todos').addEventListener('click', () => {
     const toggle = document.getElementById('toggle-premios');
     if (toggle.checked) {
@@ -834,7 +845,6 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
     }
   });
 
-  // Hacer clic en "★ Premiadas" activa el toggle
   document.getElementById('label-premiados').addEventListener('click', () => {
     const toggle = document.getElementById('toggle-premios');
     if (!toggle.checked) {
@@ -845,6 +855,7 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
     }
   });
 
+  // Cargar CSV
   fetch('https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/CSV_Art_culos.csv')
     .then(response => {
       if (!response.ok) throw new Error('Error al cargar el CSV');
@@ -892,7 +903,31 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
   });
 
   document.getElementById('anio-actual').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (event) {
+    const estrella = event.target.closest('.estrella');
+
+    if (!estrella) {
+      document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+      return;
+    }
+
+    const yaActiva = estrella.classList.contains('activo');
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+
+    if (!yaActiva) {
+      estrella.classList.add('activo');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+  });
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+  });
 </script>
+
 
 
 
