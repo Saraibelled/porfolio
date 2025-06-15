@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- BASIC META -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sara I. Belled – Visual Stories, Formats, Innovation & AI</title>
+<meta name="description" content="Portfolio of Sara I. Belled, visual journalist. Innovative narratives, information design, and AI-driven projects." />
+<meta name="author" content="Sara I. Belled" />
+<meta name="robots" content="index, follow" />
+<meta name="keywords" content="Sara I. Belled, visual journalism, editorial design, data visualization, storytelling, artificial intelligence, digital formats, journalism innovation" />
+
+<!-- CANONICAL -->
+<link rel="canonical" href="https://saraibelled.github.io/porfolio/en.html" />
+
+<!-- FAVICON -->
+<link rel="icon" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon.png" type="image/x-icon" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/fav-icon-180.png">
+
+<!-- OPEN GRAPH (SOCIAL MEDIA) -->
+<meta property="og:title" content="Sara I. Belled – Visual Stories & Innovation" />
+<meta property="og:description" content="I'm Sara I. Belled, a visual journalist. Here you'll find storytelling, formats, innovation, and AI-driven projects." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://saraibelled.github.io/porfolio/en.html" />
+<meta property="og:image" content="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/portada-1200x630.jpg" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Sara I. Belled" />
+
+<!-- TWITTER CARDS -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sara I. Belled – Visual Stories & Innovation" />
+<meta name="twitter:description" content="Portfolio of Sara I. Belled: storytelling, formats, innovation, and AI." />
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/portada-1200x630.jpg" />
+<meta name="twitter:site" content="@saraibelled" />
+<meta name="twitter:creator" content="@saraibelled" />
+
+
+<!-- APPLE + MOBILE -->
+<meta name="apple-mobile-web-app-title" content="Sara I. Belled" />
+<meta name="theme-color" content="#f2f2f2" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@500;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+
+
+  <style>
+
+/* ========== RESET ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== BASE TIPOGRAFÍA ========== */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f2f2f2;
+  color: #111111;
+  line-height: 125%;
+  padding: 20px;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 125%;
+  margin-top: 120px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 125%;
+  text-align: center;
+  padding: 20px;
+}
+
+.intro {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 16px auto 32px;
+  color: #333;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 16px auto;
+  padding: 8px 16px;
+  width: 80%;
+  max-width: 400px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #111111;
+}
+
+/* ========== FILTERS ========== */
+.filters-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.filters-container {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin: 0 8px;
+  gap: 8px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  justify-content: center;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.filters > button:last-child {
+  margin-right: 8px;
+}
+
+.filters button {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14.4px;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  position: relative;
+  z-index: 2;
+  color: #202020;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.filters button.active {
+  background-color: #FAD144;
+  color: #111;
+  font-weight: 700;
+}
+
+.filters-wrapper::before,
+.filters-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.filters-wrapper::before {
+  left: 0;
+}
+
+.filters-wrapper::after {
+  right: 0;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #6b6b6b;
+  pointer-events: auto;
+  background: linear-gradient(-90deg, rgba(242,242,242,0) 0%, rgba(242,242,242,1) 42%, rgba(242,242,242,1) 100%);
+}
+
+.scroll-left {
+  left: 0;
+  justify-content: flex-start;
+}
+
+.scroll-right {
+  right: 0;
+  background: linear-gradient(90deg, rgba(242,242,242,0) 0%, rgba(242,242,242,1) 42%, rgba(242,242,242,1) 100%);
+  justify-content: flex-end;
+}
+
+/* ========== TARJETAS / TRABAJOS ========== */
+#contenedor-trabajos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  justify-content: center;
+  gap: 32px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.tarjeta {
+  width: 280px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+}
+
+.tarjeta img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.tarjeta p {
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+
+.tarjeta.falsa {
+  opacity: 0.8;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+/* ========== ESTRELLA / TOOLTIP ========== */
+.estrella {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #FAD144;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.estrella-activa path,
+.estrella:hover path {
+  fill: #FAD144; 
+  stroke: #FAD144;
+}
+
+.estrella .tooltip {
+  position: absolute;
+  top: -10px;
+  right: 120%;
+  transform: translateY(-10%);
+  background-color: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  white-space: normal;
+  word-break: break-word;
+  width: 220px;
+  z-index: 5;
+}
+
+.estrella:hover .tooltip,
+.estrella.activo .tooltip {
+  opacity: 1;
+}
+
+/* ========== BOTÓN LEER MÁS ========== */
+.leer-mas-btn {
+  margin: 0 auto;
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #202020;
+  border: 1px solid #6b6b6b;
+  border-radius: 6px;
+  font-size: 14.4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.leer-mas-btn:hover {
+  background-color: #FAD144;
+  border: 1px solid #FAD144;
+}
+
+/* ========== TOGGLE PREMIADOS ========== */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 32px auto;
+}
+
+.toggle-label {
+  font-size: 15px;
+  color: #666;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  display: inline-flex;
+    gap: 4px;
+        cursor: pointer;
+}
+
+.toggle-label.active {
+  color: #111;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #FAD144;
+}
+
+input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+/* ========== WRAPPER + FADE ========== */
+#contenedor-trabajos-wrapper {
+  position: relative;
+  max-height: 2000px;
+  overflow: hidden;
+}
+
+#fade-bottom {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(180deg,rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 1) 55%, rgba(242, 242, 242, 1) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+#ver-mas-btn {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  border: none;
+  border-radius: 6px;
+  padding: 9.6px 22.4px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color:#6b6b6b;
+  background-color: #20202000;
+}
+
+#ver-mas-btn:hover {
+color: #202020;
+}
+
+
+#flecha-abajo {
+  width: 20px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* Animación de rebote hacia abajo */
+@keyframes flecha-rebote {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+#ver-mas-btn svg {
+  width:  20px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  animation: flecha-rebote 1.6s ease-in-out infinite;
+}
+
+#ver-mas-btn svg path {
+        fill: none;
+        stroke: #6b6b6b;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+  transition: stroke 0.3s ease;
+}
+
+#ver-mas-btn:hover svg path {
+  stroke: #202020;
+}
+
+
+
+/* ========== FOOTER ========== */
+.footer {
+  margin-top: 64px;
+  padding: 20px;
+  font-size: 14.4px;
+  color: #666666;
+  border-top: 1px solid #E0E0E0;
+}
+
+.footer p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.intro a {
+  color: #202020;            
+  text-decoration: underline;                
+  font-weight: 500;         
+  transition: color 0.3s; 
+    transition: background-color 0.3s;   
+}
+
+.intro a:hover {
+  color: #202020;
+  background-color: #FAD144;           
+  text-decoration: underline;
+}
+
+/* ========== CONTENEDOR TEXTO ========== */
+.parrafo {
+  margin-top: 120px;
+  margin-bottom: 60px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .filters {
+    gap: 4px;
+  }
+
+  .filters button {
+    padding: 6.4px 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .filters {
+    justify-content: flex-start;
+  }
+}
+
+      .cls-1 {
+        fill: none;
+        stroke: #6b6b6b;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+#flecha-d {
+width: 20px;
+}
+
+
+#flecha-i {
+width: 20px;
+}
+
+
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #999999;
+  box-shadow: 0 0 0 2px rgba(153, 153, 153, 0.3);
+}
+
+
+      .estrella-o {
+        fill: none;
+        stroke: #6b6b6b;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+      .estrella-tarjeta {
+        fill: none;
+        stroke: #FAD144;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+#estrella-svg {
+width: 20px;
+}
+
+.lang-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #202020;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.lang-btn:hover {
+  background-color: #FAD144;
+  color: #111;
+  border-color: #FAD144;
+}
+
+  </style>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<meta name="google-site-verification" content="uVca0jWVMSMKbX7NbKcba68iG8SyOAhYkIXoTDWWYyk" />
+</head>
+<body>
+<main>
+
+<button onclick="location.href='https://saraibelled.github.io/porfolio/'" id="toggle-lang" class="lang-btn">ES</button>
+
+
+<h1>Sara I Belled – Visual storytelling, Formats, Innovation & AI</h1>
+
+
+<div class="parrafo">
+  <p class="intro">
+  Hi! I’m Sara I Belled, a visual journalist. Like many in this field, I love telling stories—but I also design and shape that information through various formats and tools.
+</p>
+
+  <p class="intro">I enjoy solving problems and exploring better, faster, and simpler ways to tell stories. I currently work at Agencia Colpisa, the central newsroom for Vocento’s newspapers, where many of the tools I develop are implemented across their editorial teams.</p>
+
+  <p class="intro">From time to time, I update this portfolio and use it as a space to test new ideas. Recently, I found it hard to keep everything up to date—so I thought: why not create a page that updates directly from a spreadsheet? It helps me, and hopefully it helps you too if you’re visiting. I’m even considering adding a ‘Case Studies’ section, in case it inspires someone. You’ll have to check back to see if I actually do it :)</p>
+</div>
+
+
+  <input type="text" id="buscador" placeholder="Search stories..." />
+
+  <div class="filters-wrapper">
+    <div class="scroll-btn scroll-left" onclick="scrollFilters('categoria-filters', -100)"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="flecha-i" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <path class="cls-1" d="M33.76,6.78v28.45c0,3.58-4.18,5.54-6.93,3.25l-17.07-14.22c-2.03-1.69-2.03-4.8,0-6.49L26.83,3.53c2.75-2.29,6.93-.34,6.93,3.25Z"/>
+</svg></div>
+    <div class="filters-container">
+      <div class="filters" id="categoria-filters">
+        <button data-filter="" class="active">All</button>
+      </div>
+    </div>
+    <div class="scroll-btn scroll-right" onclick="scrollFilters('categoria-filters', 100)"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="flecha-d" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <path class="cls-1" d="M8.24,35.22V6.78c0-3.58,4.18-5.54,6.93-3.25l17.07,14.22c2.03,1.69,2.03,4.8,0,6.49l-17.07,14.22c-2.75,2.29-6.93.34-6.93-3.25Z"/>
+</svg></div>
+  </div>
+
+<div class="toggle-container">
+  <span id="label-todos" class="toggle-label active">Show all</span>
+  <label class="switch">
+    <input type="checkbox" id="toggle-premios">
+    <span class="slider round"></span>
+  </label>
+  <span id="label-premiados" class="toggle-label"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="estrella-svg" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <path class="estrella-o" d="M23.85,6.2l2.1,6.45c.4,1.24,1.55,2.07,2.85,2.07h6.78c2.91,0,4.11,3.72,1.76,5.43l-5.49,3.99c-1.05.76-1.49,2.12-1.09,3.35l2.1,6.45c.9,2.76-2.27,5.06-4.62,3.35l-5.49-3.99c-1.05-.76-2.48-.76-3.53,0l-5.49,3.99c-2.35,1.71-5.51-.59-4.62-3.35l2.1-6.45c.4-1.24-.04-2.59-1.09-3.35l-5.49-3.99c-2.35-1.71-1.14-5.43,1.76-5.43h6.78c1.3,0,2.45-.84,2.85-2.07l2.1-6.45c.9-2.76,4.81-2.76,5.71,0Z"/>
+</svg> Awarded</span>
+</div>
+
+<div id="contenedor-trabajos-wrapper">
+  <div id="contenedor-trabajos"></div>
+  <div id="fade-bottom"></div>
+<button id="ver-mas-btn" aria-label="Ver más">
+  See more<br>
+  <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="flecha-abajo" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <path class="" d="M6.78,9.88h28.45c3.58,0,5.54,4.18,3.25,6.93l-14.22,17.07c-1.69,2.03-4.8,2.03-6.49,0L3.53,16.81c-2.29-2.75-.34-6.93,3.25-6.93Z"/>
+</svg>
+</button>
+</div>
+
+
+<div class="parrafo">
+  <p class="intro">
+If you’re curious, you can still view <a href="https://saraibelled.github.io/porfolio/version-2024/" target="_blank">my previous portfolio here</a>. Fell free to visit <a href="https://www.linkedin.com/in/saraibelled-visualjournalist/" target="_blank">my LinkedIn page</a> or <a href="mailto:saraibelled@gmail.com" target="_blank">get in touch</a> if you'd like to connect.</p>
+
+<footer class="footer">
+  <p>&copy; <span id="anio-actual"></span> — Last updated: <span id="fecha-reciente"></span><br>
+  A portfolio designed and developed by Sara I Belled with a little help from and a lot of ♡</p>
+</footer>
+
+</div>
+
+
+</main>
+
+<script>
+  let trabajosGlobal = [];
+  let filtroCategoria = "";
+  let filtroPremiado = "";
+
+  function scrollFilters(id, amount) {
+    const el = document.getElementById(id);
+    el.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+
+  function actualizarVisibilidadFlechas() {
+    const wrappers = document.querySelectorAll('.filters-wrapper');
+    wrappers.forEach(wrapper => {
+      const container = wrapper.querySelector('.filters');
+      const scrollLeftBtn = wrapper.querySelector('.scroll-left');
+      const scrollRightBtn = wrapper.querySelector('.scroll-right');
+      const scrollLeft = Math.round(container.scrollLeft);
+      const scrollWidth = Math.round(container.scrollWidth);
+      const clientWidth = Math.round(container.clientWidth);
+      const maxScrollLeft = scrollWidth - clientWidth;
+      const margen = 2;
+
+      if (scrollWidth > clientWidth + 1) {
+        scrollLeftBtn.style.display = scrollLeft > margen ? 'flex' : 'none';
+        scrollRightBtn.style.display = scrollLeft < maxScrollLeft - margen ? 'flex' : 'none';
+      } else {
+        scrollLeftBtn.style.display = 'none';
+        scrollRightBtn.style.display = 'none';
+      }
+    });
+  }
+
+ function generarFiltrosCategoria(trabajos) {
+  const contenedor = document.getElementById('categoria-filters');
+  const categoriasSet = new Set();
+
+  trabajos.forEach(t => {
+    t.buscadorArray.forEach(cat => {
+      if (cat !== 'Narrativas') categoriasSet.add(cat);
+    });
+  });
+
+  const traduccionesCategorias = {
+    "Formato": "Formats",
+    "Gamificación": "Gamification",
+    "Grandes narrativas": "Longform",
+    "Última hora": "Breaking news",
+    "Datajournalism": "Data Journalism"
+  };
+
+  const categorias = Array.from(categoriasSet).sort();
+  categorias.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.textContent = traduccionesCategorias[cat] || cat; // Usa la traducción si existe
+    btn.setAttribute('data-filter', cat);
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#categoria-filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtroCategoria = cat;
+      renderTrabajos(trabajosGlobal);
+      actualizarVisibilidadFlechas();
+    });
+    contenedor.appendChild(btn);
+  });
+
+  contenedor.querySelector('button[data-filter=""]').addEventListener('click', () => {
+    document.querySelectorAll('#categoria-filters button').forEach(b => b.classList.remove('active'));
+    contenedor.querySelector('button[data-filter=""]').classList.add('active');
+    filtroCategoria = "";
+    renderTrabajos(trabajosGlobal);
+    actualizarVisibilidadFlechas();
+  });
+}
+
+
+  function renderTrabajos(trabajos) {
+    const contenedor = document.getElementById('contenedor-trabajos');
+    const query = document.getElementById('buscador').value.toLowerCase();
+    const premiadosSolo = document.getElementById('toggle-premios').checked;
+
+    contenedor.innerHTML = '';
+
+    const tarjetasFiltradas = trabajos.filter(trabajo => {
+      const coincideTexto =
+        trabajo.titulo?.toLowerCase().includes(query) ||
+        trabajo.categoria?.toLowerCase().includes(query) ||
+        trabajo.masinfo?.toLowerCase().includes(query);
+      const coincideCategoria = !filtroCategoria || trabajo.buscadorArray.includes(filtroCategoria);
+      const coincidePremiado = !premiadosSolo || trabajo.premiado;
+      return coincideTexto && coincideCategoria && coincidePremiado;
+    });
+
+    if (tarjetasFiltradas.length === 0) {
+  const tarjetaFalsa = document.createElement('div');
+  tarjetaFalsa.className = 'tarjeta falsa';
+  tarjetaFalsa.innerHTML = `
+    <h3>No results for now</h3>
+    <p style="color: #666;">No stories match your filters.<br>Try a different search or reset filters :)</p>
+    <img src="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/image-none.jpg" alt="No results" style="border-radius: 8px; margin: 16px 0;" />
+  `;
+  contenedor.appendChild(tarjetaFalsa);
+  return;
+}
+
+    tarjetasFiltradas.forEach(trabajo => {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'tarjeta';
+      tarjeta.style.backgroundColor = trabajo.colorFondo || '#ffffff';
+      tarjeta.style.color = trabajo.colorTexto || '#000000';
+
+      const textoPremio = (trabajo['donde-premiado'] || trabajo.premiado || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/\\n/g, '<br>');
+
+      tarjeta.innerHTML = `
+        ${trabajo.premiado ? `
+          <div class="estrella">
+            <svg id="estrella-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+              <path class="estrella-tarjeta" d="M23.85,6.2l2.1,6.45c.4,1.24,1.55,2.07,2.85,2.07h6.78c2.91,0,4.11,3.72,1.76,5.43l-5.49,3.99c-1.05.76-1.49,2.12-1.09,3.35l2.1,6.45c.9,2.76-2.27,5.06-4.62,3.35l-5.49-3.99c-1.05-.76-2.48-.76-3.53,0l-5.49,3.99c-2.35,1.71-5.51-.59-4.62-3.35l2.1-6.45c.4-1.24-.04-2.59-1.09-3.35l-5.49-3.99c-2.35-1.71-1.14-5.43,1.76-5.43h6.78c1.3,0,2.45-.84,2.85-2.07l2.1-6.45c.9-2.76,4.81-2.76,5.71,0Z"/>
+            </svg>
+            <div class="tooltip">${textoPremio}</div>
+          </div>` : ''}
+        <h3>${trabajo.titulo}</h3>
+        <p style="color: ${trabajo.colorfecha || '#6b6b6b'}">${trabajo.fecha}</p>
+
+        ${trabajo.imagen?.endsWith('.mp4') || trabajo.imagen?.endsWith('.webm') ? `
+          <video autoplay muted loop playsinline width="100%" style="border-radius: 8px;">
+            <source src="${trabajo.imagen}" type="video/mp4">
+            Tu navegador no soporta el video.
+          </video>` :
+        trabajo.imagen?.includes('youtube.com') || trabajo.imagen?.includes('vimeo.com') ? `
+          <iframe src="${trabajo.imagen}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; margin: 1rem 0;"></iframe>` :
+        trabajo.imagen ? `
+          <img src="${trabajo.imagen}" alt="${trabajo.titulo}" loading="lazy" style="border-radius: 8px; margin: 1rem 0;" />` : ''}
+        <button onclick="window.open('${trabajo.url}', '_blank')" class="leer-mas-btn">Leer más</button>
+      `;
+
+      contenedor.appendChild(tarjeta);
+    });
+
+    evaluarAlturaTrabajos();
+  }
+
+  function evaluarAlturaTrabajos() {
+    const wrapper = document.getElementById('contenedor-trabajos-wrapper');
+    const inner = document.getElementById('contenedor-trabajos');
+    const fade = document.getElementById('fade-bottom');
+    const btn = document.getElementById('ver-mas-btn');
+
+    setTimeout(() => {
+      const altura = inner.offsetHeight;
+      if (altura > 2000) {
+        fade.style.display = 'block';
+        btn.style.display = 'block';
+        wrapper.style.maxHeight = '2000px';
+      } else {
+        fade.style.display = 'none';
+        btn.style.display = 'none';
+        wrapper.style.maxHeight = 'none';
+      }
+    }, 100);
+  }
+
+  // Mostrar todo
+  document.getElementById('ver-mas-btn').addEventListener('click', () => {
+    document.getElementById('fade-bottom').style.display = 'none';
+    document.getElementById('ver-mas-btn').style.display = 'none';
+    document.getElementById('contenedor-trabajos-wrapper').style.maxHeight = 'none';
+  });
+
+  document.getElementById('buscador').addEventListener('input', () => {
+    renderTrabajos(trabajosGlobal);
+  });
+
+  document.getElementById('toggle-premios').addEventListener('change', function () {
+    const labelTodos = document.getElementById('label-todos');
+    const labelPremiados = document.getElementById('label-premiados');
+
+    if (this.checked) {
+      labelTodos.classList.remove('active');
+      labelPremiados.classList.add('active');
+    } else {
+      labelTodos.classList.add('active');
+      labelPremiados.classList.remove('active');
+    }
+
+    renderTrabajos(trabajosGlobal);
+  });
+
+  document.getElementById('label-todos').addEventListener('click', () => {
+    const toggle = document.getElementById('toggle-premios');
+    if (toggle.checked) {
+      toggle.checked = false;
+      document.getElementById('label-todos').classList.add('active');
+      document.getElementById('label-premiados').classList.remove('active');
+      renderTrabajos(trabajosGlobal);
+    }
+  });
+
+  document.getElementById('label-premiados').addEventListener('click', () => {
+    const toggle = document.getElementById('toggle-premios');
+    if (!toggle.checked) {
+      toggle.checked = true;
+      document.getElementById('label-todos').classList.remove('active');
+      document.getElementById('label-premiados').classList.add('active');
+      renderTrabajos(trabajosGlobal);
+    }
+  });
+
+  // Cargar CSV
+  fetch('https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/CSV_Art_culos.csv')
+    .then(response => {
+      if (!response.ok) throw new Error('Error al cargar el CSV');
+      return response.text();
+    })
+    .then(csvText => {
+      const data = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true
+      }).data;
+
+      data.forEach(trabajo => {
+        trabajo.buscadorArray = (trabajo.buscador || "")
+          .split(',')
+          .map(c => c.trim())
+          .filter(Boolean);
+      });
+
+      data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+      const fechaMasReciente = data[0]?.fecha;
+      if (fechaMasReciente) {
+        const fechaFormateada = new Date(fechaMasReciente).toLocaleDateString('es-ES', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        document.getElementById('fecha-reciente').textContent = fechaFormateada;
+      }
+
+      trabajosGlobal = data;
+      generarFiltrosCategoria(data);
+      renderTrabajos(data);
+      setTimeout(actualizarVisibilidadFlechas, 100);
+      setTimeout(actualizarVisibilidadFlechas, 300);
+    })
+    .catch(error => {
+      console.error("Error al cargar los datos:", error);
+      document.getElementById("contenedor-trabajos").innerHTML =
+        "<p>Error al cargar los trabajos. Intenta más tarde.</p>";
+    });
+
+  window.addEventListener('resize', actualizarVisibilidadFlechas);
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.filters').forEach(f => {
+      f.addEventListener('scroll', actualizarVisibilidadFlechas);
+    });
+  });
+
+  document.getElementById('anio-actual').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (event) {
+    const estrella = event.target.closest('.estrella');
+
+    if (!estrella) {
+      document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+      return;
+    }
+
+    const yaActiva = estrella.classList.contains('activo');
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+
+    if (!yaActiva) {
+      estrella.classList.add('activo');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+  });
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.estrella').forEach(e => e.classList.remove('activo'));
+  });
+</script>
+
+
+
+
+</body>
+</html>
