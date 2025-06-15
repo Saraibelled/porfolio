@@ -40,7 +40,7 @@
 
 <!-- APPLE + MOBILE -->
 <meta name="apple-mobile-web-app-title" content="Sara I. Belled" />
-<meta name="theme-color" content="#FAD144" />
+<meta name="theme-color" content="#f2f2f2" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@500;700&display=swap" rel="stylesheet">
@@ -569,6 +569,29 @@ input[type="text"]:focus {
 #estrella-svg {
 width: 20px;
 }
+
+.lang-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #202020;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.lang-btn:hover {
+  background-color: #FAD144;
+  color: #111;
+  border-color: #FAD144;
+}
   </style>
 
 
@@ -578,6 +601,9 @@ width: 20px;
 </head>
 <body>
 <main>
+
+<button onclick="location.href='https://saraibelled.github.io/porfolio/'" id="toggle-lang" class="lang-btn">EN</button>
+
 
   <h1>Sara I Belled – Narrativa, formatos, innovación e IA</h1>
 
@@ -736,7 +762,7 @@ Por si tienes curiosidad, he dejado <a href="https://saraibelled.github.io/porfo
       tarjetaFalsa.innerHTML = `
         <h3>Sin resultados por el momento</h3>
         <p style="color: #666;">No se encontraron historias con esos criterios.<br>Prueba otro filtro o usa el buscador :)</p>
-        <img src="https://github.com/Saraibelled/porfolio/blob/main/image/image-none.jpg?raw=true" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
+        <img src="https://raw.githubusercontent.com/Saraibelled/porfolio/refs/heads/main/image/image-none.jpg" alt="Sin resultados" style="border-radius: 8px; margin: 16px 0;" />
       `;
       contenedor.appendChild(tarjetaFalsa);
       return;
