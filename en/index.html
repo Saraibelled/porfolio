@@ -785,7 +785,7 @@ If you’re curious, you can still view <a href="https://saraibelled.github.io/p
       tarjeta.style.backgroundColor = trabajo.colorFondo || '#ffffff';
       tarjeta.style.color = trabajo.colorTexto || '#000000';
 
-      const textoPremio = (trabajo['donde-premiado'] || trabajo.premiado || '')
+      const textoPremio = (trabajo['donde-premiado_en'] || trabajo.premiado || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
