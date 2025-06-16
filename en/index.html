@@ -761,7 +761,7 @@ If you’re curious, you can still view <a href="https://saraibelled.github.io/p
       const coincideTexto =
         trabajo.titulo?.toLowerCase().includes(query) ||
         trabajo.categoria?.toLowerCase().includes(query) ||
-        trabajo.masinfo?.toLowerCase().includes(query);
+        trabajo.masinfo_en?.toLowerCase().includes(query);
       const coincideCategoria = !filtroCategoria || trabajo.buscadorArray.includes(filtroCategoria);
       const coincidePremiado = !premiadosSolo || trabajo.premiado;
       return coincideTexto && coincideCategoria && coincidePremiado;
