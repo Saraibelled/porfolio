@@ -42,6 +42,9 @@ button{font-family:inherit}
 .sib-whirl .sib-sp{position:absolute;inset:0;animation:spin 6s linear infinite}
 .sib-whirl .sib-rp{position:absolute;inset:30px;border-radius:50%;border:3px solid rgba(255,255,255,.45);animation:ripple 2.4s ease-out infinite}
 .sib-whirl .sib-rp.sib-b{animation-delay:-1.2s}
+.sib-hint{position:absolute;width:0;height:0;z-index:5;pointer-events:none}
+.sib-hint-ring{position:absolute;left:-70px;top:-70px;width:140px;height:140px;border:3px solid #F6EBD2;border-radius:50%;animation:ripple 1.8s ease-out infinite}
+.sib-hint-txt{position:absolute;left:0;top:78px;transform:translateX(-50%);white-space:nowrap;padding:9px 14px;border-radius:5px;background:#0E2A33;color:#F6EBD2;font:600 16px Inter,sans-serif;box-shadow:0 6px 18px rgba(14,42,51,.3)}
 @keyframes halo{0%,100%{transform:scale(.8);opacity:.55}50%{transform:scale(1.15);opacity:1}}
 .sib-halo{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,190,.95) 0%,rgba(255,244,190,.45) 40%,rgba(255,244,190,0) 70%);animation:halo 1.8s ease-in-out infinite;pointer-events:none}
 .sib-hudbtn.sib-new{background:#FFF4BE;border-color:#C9A227}
@@ -105,6 +108,8 @@ button{font-family:inherit}
 #toast{position:absolute;left:50%;top:18px;transform:translateX(-50%);max-width:calc(100% - 40px);padding:12px 18px;background:#141414;color:#F6EBD2;border-radius:5px;font:600 14px Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.3);text-align:center}
 .sib-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:16px 20px;font-family:'Red Hat Mono',monospace;font-size:12px;color:#9FC2C4}
 .sib-foot{align-items:baseline}
+body.sib-mob .sib-foot{display:none}
+.sib-minfo-link{display:block;margin-top:10px;padding:0;border:0;background:transparent;color:#141414;font:500 14px Inter,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left}
 .sib-foot button{border:0;background:transparent;padding:0;color:#F3EFE6;font:inherit;text-decoration:underline;cursor:pointer}
 .sib-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 [hidden]{display:none !important}
@@ -258,6 +263,8 @@ body.sib-mob #toast{top:64px}
 <div id="mInfo" class="sib-card" hidden style="margin-top:10px;padding:16px;border-radius:8px">
 <p style="margin:0;font-size:14px;line-height:1.5">Dicen que los periodistas sabemos un mar de cosas… con muy poca profundidad. Toca el agua para navegar y toca una botella para abrirla. Las de corcho dorado guardan trozos del mapa del tesoro.</p>
 <p class="sib-mono" style="margin:10px 0 0;font-size:12px;color:#5A564E">Profundidad: <span class="sib-js-depth"></span> · Explorado: <span class="sib-js-explored">0</span> %</p>
+<button type="button" class="sib-minfo-link" data-act="list">Ver todo en lista →</button>
+<button type="button" class="sib-minfo-link" data-act="bitacora">Cuaderno de bitácora · Cómo está hecho</button>
 <button type="button" class="sib-h-light sib-js-reset" data-act="reset" hidden style="display:block;margin-top:10px;min-height:36px;padding:0 12px;border-radius:5px;font:600 12px Inter,sans-serif;cursor:pointer;background:transparent;color:#5B4720;border:1px solid rgba(91,71,32,.45)">Empezar de cero</button>
 </div>
 </div>
@@ -526,6 +533,21 @@ body.sib-mob #toast{top:64px}
     if (el) { el.classList.add('sib-got'); var h = el.querySelector('.sib-halo'); if (h) h.remove(); var p = el.querySelector('.sib-paper'); if (p) p.setAttribute('fill', '#FFFFFF'); }
     var m = $('#mini [data-m="' + id + '"]'); if (m) m.style.background = '#F2C230';
   }
+  var HINT = 0, tipPending = false;
+  try { HINT = +(localStorage.getItem('marSaraHint') || 0); } catch (e) { /* */ }
+  function setHint(n) { HINT = n; try { localStorage.setItem('marSaraHint', String(n)); } catch (e) { /* */ } }
+  function showHint() {
+    if (HINT > 0 || $('#hint') || !B.length) return;
+    var h = document.createElement('div'); h.id = 'hint'; h.className = 'sib-hint'; h.setAttribute('role', 'status');
+    h.style.left = S.bx + 'px'; h.style.top = S.by + 'px';
+    h.innerHTML = '<span class="sib-hint-ring"></span><span class="sib-hint-txt">' + (S.mob ? 'Toca el agua para navegar' : 'Haz clic en el agua para navegar') + '</span>';
+    $('#world').appendChild(h);
+    setTimeout(function () { hideHint(false); }, 12000);
+  }
+  function hideHint(sailed) {
+    var h = $('#hint'); if (!h) return;
+    h.parentNode.removeChild(h); setHint(1); if (sailed) tipPending = true;
+  }
   function toast(msg) {
     var t = $('#toast'); t.textContent = msg; t.hidden = false;
     clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 4200);
@@ -629,6 +651,7 @@ body.sib-mob #toast{top:64px}
   }
   function sail(x, y, openId, noWhirl) {
     if (whirlLock && !noWhirl) return;
+    hideHint(true);
     boat.classList.remove('sib-spinning');
     x = Math.max(60, Math.min(W - 60, x)); y = Math.max(60, Math.min(H - 60, y));
     var tg = toShore({ x: x, y: y }); x = tg.x; y = tg.y;
@@ -663,6 +686,7 @@ body.sib-mob #toast{top:64px}
   }
   function arrive(x, y, openId) {
     var id = openId;
+    if (tipPending) { tipPending = false; setHint(2); if (id == null && !S.fromWhirl) toast(S.mob ? 'Toca una botella para abrirla' : 'Haz clic en una botella para abrirla'); }
     if (id == null) {
       if (Math.hypot(TREASURE.x - x, TREASURE.y - y) < 220) id = 'tesoro';
       else { var bd = S.mob ? 90 : 70; B.forEach(function (b) { var d = Math.hypot(b.x - x, b.y - y); if (d < bd) { bd = d; id = b.id; } }); }
@@ -852,6 +876,7 @@ body.sib-mob #toast{top:64px}
   function closeMsg() {
     var wasOpen = !$('#overlay').hidden; $('#overlay').hidden = true; S.open = null;
     var rf = S.returnFocus; S.returnFocus = null; lastBottleFocus = null;
+    if (wasOpen && HINT === 0) setTimeout(showHint, 350);
     if (wasOpen && rf && rf.focus && document.contains(rf)) { try { rf.focus({ preventScroll: true }); } catch (e) { /* */ } }
   }
   function closeMini() { var m = $('#mini'), tb = $('#miniTab'); if (m) m.classList.remove('sib-open'); if (tb) { tb.textContent = 'Mapa'; tb.setAttribute('aria-expanded', 'false'); } }
